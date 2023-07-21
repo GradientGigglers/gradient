@@ -4,10 +4,14 @@ import psycopg2
 import datetime
 import json
 import utils
+import os
+
+postgres_db = os.environ.get('POSTGRES_DB')
+postgres_password = os.environ.get('POSTGRES_PASSWORD')
 
 
 utils.check_connection_status("postgres", 5432)
-p = psycopg2.connect(host="postgres", user="root", port=5432, database="W9sV6cL2dX", password="E5rG7tY3fH")
+p = psycopg2.connect(host="postgres", user="root", port=5432, database=postgres_db, password=postgres_password)
 k = confluent_kafka.Consumer({"bootstrap.servers": "kafka:29092", "group.id": "logs-group-1", "auto.offset.reset": "earliest"})
 k.subscribe(["logs"])
 p.autocommit = True

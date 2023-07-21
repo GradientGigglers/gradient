@@ -1,7 +1,11 @@
 import psycopg2
+import os
 
 
-connection = psycopg2.connect(host="localhost", user="root", port=5432, database="W9sV6cL2dX", password="E5rG7tY3fH")
+postgres_db = os.environ.get('POSTGRES_DB')
+postgres_password = os.environ.get('POSTGRES_PASSWORD')
+
+connection = psycopg2.connect(host="localhost", user="root", port=5432, database=postgres_db, password=postgres_password)
 connection.autocommit = True
 cursor = connection.cursor()
 

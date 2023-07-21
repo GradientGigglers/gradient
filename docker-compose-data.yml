@@ -21,8 +21,8 @@ services:
       - 5432:5432
     environment:
       POSTGRES_USER: root
-      POSTGRES_PASSWORD: E5rG7tY3fH
-      POSTGRES_DB: W9sV6cL2dX
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     volumes:
       - ./data_pg:/var/lib/postgresql/data
 
