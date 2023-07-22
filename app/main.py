@@ -5,6 +5,7 @@ import uuid
 import json
 import time
 import os
+import random
 
 
 redis_password = os.environ.get('REDIS_PASSWORD')
@@ -15,7 +16,7 @@ app = fastapi.FastAPI()
 
 @app.on_event("startup")
 async def startup_event():
-  app.state.r = redis.Redis(host="redis", port=6379, db=0, password=redis_password)
+  app.state.r = redis.Redis(host="redis", port=6379, db=0, password=redis_password, encoding='utf-8')
   app.state.k = confluent_kafka.Producer({"bootstrap.servers": "kafka:29092"})
 
 
@@ -29,7 +30,12 @@ def read_root(request: fastapi.Request):
   app.state.r.incr("test_counter")
   user_id = request.headers.get("User")
   session = request.headers.get("Session")
-  item_id = str(uuid.uuid4())
+  # get length of item_data table for random number generation
+  item_data_length = app.state.r.hlen('item_data')
+  # pull item_id from the table format is bytes
+  item_id_b = app.state.r.hget('item_data', random.randint(0,item_data_length-1))
+  # convert item_id into utf-8 to send to user
+  item_id = item_id_b.decode('utf-8')
   ts = int(time.time())
 
   print(f"User {user_id} in session {session} requested an item at {ts}")
