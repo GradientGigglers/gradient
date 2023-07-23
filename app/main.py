@@ -63,7 +63,10 @@ def read_root(request: fastapi.Request):
 def get_evt(request: fastapi.Request):
   user_id = request.headers.get("User")
   session = request.headers.get("Session")
+  event = request.headers.get("Event")
   ts = int(time.time())
+  
+  print(f"Incoming /evt - User: {user_id}, Session: {session}, Event: {event}, Time: {ts}")
 
   # add to session history to leverage in
   # session recommendations
