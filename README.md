@@ -19,10 +19,10 @@ $ pip install -r requirements.txt
 
 
 ```sh
-$ uvicorn app.main:app --host 0.0.0.0 --port 7777 --reload
-$ curl -X POST "http://localhost:7777/item" -H "Content-Type: application/json" -d '"Hello, Redis!"'
+$ uvicorn app.main:app --host 0.0.0.0 --port 8080 --reload
+$ curl -X POST "http://localhost:8080/item" -H "Content-Type: application/json" -d '"Hello, Redis!"'
 # {"status": "success"}
-$ curl "http://localhost:7777"
+$ curl "http://localhost:8080"
 # {"status": "Hello, Redis!"}
 ```
 
@@ -45,9 +45,28 @@ Visual Studio Code has a Jupyter extension which allows you to write
 code directly on a python file and by adding `#%%` transform it in
 an interactive cell. Try it out :)
 
+```sh
+$ conda env list
+$ conda create --name tiny python=3.8 -y
+$ conda activate tiny
+$ conda install -y pytorch torchvision torchaudio cpuonly -c pytorch
+```
+
 ## Scripts
 
 ```sh
 $ source env/bin/activate
 $ python scripts/create_pg_schema.py
 ```
+
+
+## Dashboards
+
+https://grafana.com/docs/grafana/latest/administration/provisioning/#dashboards
+
+Prometheus and Grafana are the two main tools used for
+real-time analytics and monitoring. Read more:
+
+- https://prometheus.io/
+- https://grafana.com/docs/
+- https://grafana.com/docs/grafana/latest/administration/provisioning/#dashboards

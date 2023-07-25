@@ -1,14 +1,4 @@
-import redis
-import json
-import os
-
-redis_password = os.environ.get('REDIS_PASSWORD')
-
-r = redis.Redis(host="localhost", port=6379, db=0, password=redis_password, encoding='utf-8')
-
-# deletes any existing data
-
-r.delete('item_data')
+import requests
  
 # data file
 
@@ -140014,10 +140004,13 @@ item_data = [{
     }
   ]
 
-# loop through each item and and store the number as the key and the item_key as
-# the value
+# loop through each image and store 
 
-for i, item in enumerate(item_data, start=0):
-    key = i
-    value = item['item_key']
-    r.hset('item_data', key, value)
+for item in item_data:
+  if item['type'] == "img":
+    item_key = item['item_key']
+    url = f"http://tiny-images-jk9apq.s3.us-east-1.amazonaws.com/{item_key}.jpg"
+    
+    response = requests.get(url)
+    with open(f"../ml_scripts/images/{item_key}.jpg", 'wb') as image:
+        image.write(response.content)
