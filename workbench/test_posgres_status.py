@@ -3,7 +3,7 @@ import psycopg2
 import socket
 import time
 #%%
-p = psycopg2.connect(host="localhost", user="root", port=5433, database="W9sV6cL2dX", password="E5rG7tY3fH")
+p = psycopg2.connect(host="localhost", user="root", port=5433, database="gradient_gigglers_postgres_db", password="g345T£4tg324G3G325G345G4TEGQedfwerqk3t6uykw234234gfqwegq")
 # %%
 def check_connection_status(host, port):
   s = socket.socket()

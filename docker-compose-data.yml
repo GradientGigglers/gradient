@@ -37,3 +37,4 @@ services:
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
     volumes:
       - ./data_admin:/var/lib/pgadmin
+

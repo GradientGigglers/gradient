@@ -14,6 +14,7 @@ redis_password = os.environ.get('REDIS_PASSWORD')
 app = fastapi.FastAPI()
 
 
+
 @app.on_event("startup")
 async def startup_event():
   app.state.r = redis.Redis(host="redis", port=6379, db=0, password=redis_password, encoding='utf-8')
@@ -34,7 +35,13 @@ def read_root(request: fastapi.Request):
 
   random_item_key = app.state.a.randomkey()
   random_item_info = app.state.a.hgetall(random_item_key)
-  item_id = random_item_info['id']
+  random_item_info_decoded = {}
+  for key, value in random_item_info.items():
+    random_item_info_decoded[key.decode("utf-8")] = value.decode("utf-8")
+  # test_decoded = random_item_info
+  print("random_item_info_decoded", random_item_info_decoded)
+  item_id = random_item_info_decoded['id']
+  print("item_id", item_id)
   ts = int(time.time())
 
   print(f"User {user_id} in session {session} requested an item at {ts}")
