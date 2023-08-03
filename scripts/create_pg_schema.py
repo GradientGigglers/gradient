@@ -1,6 +1,8 @@
 import psycopg2
 import os
+import dotenv
 
+dotenv.load_dotenv()
 
 postgres_db = os.environ.get('POSTGRES_DB')
 postgres_password = os.environ.get('POSTGRES_PASSWORD')
