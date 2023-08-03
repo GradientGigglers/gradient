@@ -27,3 +27,4 @@ pandas
 torch
 matplotlib
 scikit-learn
+gensim
