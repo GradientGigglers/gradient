@@ -76,3 +76,7 @@ def main():
 if __name__ == "__main__":
   prometheus_client.start_http_server(9965)
   main()
+
+"""
+SELECT table_name, column_name, column_default, is_nullable, data_type FROM information_schema.columns WHERE table_name = 'fct_hourly_metric' ORDER BY ordinal_position;
+"""
