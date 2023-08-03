@@ -10,7 +10,7 @@ services:
       - ./monitor/prometheus/data:/prometheus
       - ./monitor/prometheus/config:/etc/prometheus
     ports:
-      - 9091:9090
+      - 9090:9090
 
   exporter:
     image: quay.io/prometheus/node-exporter:latest
@@ -46,3 +46,9 @@ services:
       - ./monitor/dashboards:/etc/dashboards
     ports:
       - 3001:3000
+
+  pushgateway:
+    image: prom/pushgateway:latest
+    restart: always
+    ports:
+      - 9091:9091
